@@ -114,8 +114,8 @@ open class PageBulletinItem: BulletinItem {
 
     // MARK: - Buttons
 
-    public var actionButton: ContainerView<HighlightButton>? = nil
-    public var alternativeButton: UIButton? = nil
+    internal var actionButton: ContainerView<HighlightButton>? = nil
+    internal var alternativeButton: UIButton? = nil
 
     /**
      * The code to execute when the action button is tapped.
@@ -150,6 +150,9 @@ open class PageBulletinItem: BulletinItem {
     @objc open func alternativeButtonTapped(sender: UIButton) {
         alternativeHandler?(self)
     }
+
+    
+    open public(set) var buttonPressDelay: Double = 0.0
 
 
     // MARK: - View Management

@@ -280,6 +280,16 @@ public final class BulletinManager {
             arrangedSubview.isHidden = isPreparing ? false : true
             viewController.contentStackView.addArrangedSubview(arrangedSubview)
         }
+        
+        // dim button if needed
+        // check if top item has button delay...
+        if let item = self.currentItem as? PageBulletinItem,
+            item.buttonPressDelay > 0 {
+            
+            // disable all buttons until after delay
+            item.actionButton?.contentView.isEnabled = false
+            item.alternativeButton?.isEnabled = false
+        }
 
         // Animate transition
 
@@ -341,6 +351,26 @@ public final class BulletinManager {
                     }
 
                     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, newArrangedSubviews.first)
+                    
+                    // check if top item has button delay...
+                    if let item = self.currentItem as? PageBulletinItem,
+                        item.buttonPressDelay > 0 {
+                        
+                        // show all buttons in animation fade after delay
+                        DispatchQueue.main.asyncAfter(deadline: .now() + item.buttonPressDelay, execute: {
+                            if let actionButton = item.actionButton {
+                                UIView.transition(with: actionButton, duration: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
+                                    item.actionButton?.contentView.isEnabled = true
+                                })
+                            }
+                            
+                            if let actionButton = item.alternativeButton {
+                                UIView.transition(with: actionButton, duration: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
+                                    item.alternativeButton?.isEnabled = true
+                                })
+                            }
+                        })
+                    }
                     
                 }
 
