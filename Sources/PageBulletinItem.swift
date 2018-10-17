@@ -114,8 +114,8 @@ open class PageBulletinItem: BulletinItem {
 
     // MARK: - Buttons
 
-    fileprivate var actionButton: ContainerView<HighlightButton>? = nil
-    fileprivate var alternativeButton: UIButton? = nil
+    public var actionButton: ContainerView<HighlightButton>? = nil
+    public var alternativeButton: UIButton? = nil
 
     /**
      * The code to execute when the action button is tapped.
