@@ -286,9 +286,9 @@ public final class BulletinManager {
         if let item = self.currentItem as? PageBulletinItem,
             item.buttonPressDelay > 0 {
             
-            // disable all buttons until after delay
-            item.actionButton?.contentView.isEnabled = false
-            item.alternativeButton?.isEnabled = false
+            // hide (opacity=0) all buttons until after delay
+            item.actionButton?.contentView.alpha = 0.0
+            item.alternativeButton?.alpha = 0.0
         }
 
         // Animate transition
@@ -357,18 +357,12 @@ public final class BulletinManager {
                         item.buttonPressDelay > 0 {
                         
                         // show all buttons in animation fade after delay
-                        DispatchQueue.main.asyncAfter(deadline: .now() + item.buttonPressDelay, execute: {
-                            if let actionButton = item.actionButton {
-                                UIView.transition(with: actionButton, duration: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
-                                    item.actionButton?.contentView.isEnabled = true
-                                })
-                            }
-                            
-                            if let actionButton = item.alternativeButton {
-                                UIView.transition(with: actionButton, duration: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
-                                    item.alternativeButton?.isEnabled = true
-                                })
-                            }
+                        UIView.animate(withDuration: 0.2, delay: item.buttonPressDelay, options: .curveEaseInOut, animations: {
+                            item.actionButton?.contentView.alpha = 1.0
+                        })
+                    
+                        UIView.animate(withDuration: 0.2, delay: item.buttonPressDelay, options: .curveEaseInOut, animations: {
+                            item.alternativeButton?.alpha = 1.0
                         })
                     }
                     
