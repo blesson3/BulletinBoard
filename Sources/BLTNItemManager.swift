@@ -498,6 +498,17 @@ extension BLTNItemManager {
             for arrangedSubview in newArrangedSubviews {
                 bulletinController.contentStackView.addArrangedSubview(arrangedSubview)
             }
+            
+            
+            // dim button if needed
+            // check if top item has button delay...
+            if let item = self.currentItem as? BLTNPageItem,
+                item.buttonPressDelay > 0 {
+                
+                // hide (opacity=0) all buttons until after delay
+                item.actionButton?.alpha = 0.0
+                item.alternativeButton?.alpha = 0.0
+            }
 
         }
 
@@ -568,6 +579,20 @@ extension BLTNItemManager {
             }
 
             UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, newArrangedSubviews.first)
+            
+            // check if top item has button delay...
+            if let item = self.currentItem as? BLTNPageItem,
+                item.buttonPressDelay > 0 {
+                
+                // show all buttons in animation fade after delay
+                UIView.animate(withDuration: 0.2, delay: item.buttonPressDelay, options: .curveEaseInOut, animations: {
+                    item.actionButton?.alpha = 1.0
+                })
+                
+                UIView.animate(withDuration: 0.2, delay: item.buttonPressDelay, options: .curveEaseInOut, animations: {
+                    item.alternativeButton?.alpha = 1.0
+                })
+            }
 
         }
 

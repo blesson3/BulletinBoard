@@ -79,6 +79,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Customization
 
+@property (nonatomic) double buttonPressDelay;
+
 /**
  * The views to display above the title.
  *
