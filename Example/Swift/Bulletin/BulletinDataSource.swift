@@ -135,9 +135,10 @@ enum BulletinDataSource {
         page.image = #imageLiteral(resourceName: "NotificationPrompt")
         page.imageAccessibilityLabel = "Notifications Icon"
 
-        page.descriptionText = "Receive push notifications when new photos of pets are available."
+        page.descriptionText = "Receive push notifications when new photos of pets are available. w/ button delay"
         page.actionButtonTitle = "Subscribe"
         page.alternativeButtonTitle = "Not now"
+        page.buttonPressDelay = 1.5
 
         page.isDismissable = false
 
