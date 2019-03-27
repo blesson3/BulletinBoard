@@ -1,5 +1,18 @@
 # _BulletinBoard_ Changelog
 
+## 🔖 v3.0.0
+
+### New Features
+
+- Add  `isShowingBulletin` property
+- Add `willDisplay` method to BLTNItem
+- Add option to show the bulletin above the whole application
+
+### Fixes
+
+- Upgrade to Swift 4.2
+- Fix frozen dismissal after initial interaction
+
 ## 🔖 v2.0.2
 
 - Fix setters and retain semantics
